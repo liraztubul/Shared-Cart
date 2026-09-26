@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>SharedCart</title>
+
+  <link rel="manifest" href="/static/manifest.json">
+  <meta name="theme-color" content="#2f6f4f">
+
+  <!-- iOS מתעלם מ-manifest ודורש את אלה -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="SharedCart">
+  <link rel="apple-touch-icon" href="/static/icons/icon-192.png">
+
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+  <header>
+    <h1>רשימת קניות</h1>
+    <button id="end-trip" class="ghost">סיימתי קניות</button>
+  </header>
+
+  <form id="add-form">
+    <input id="add-input" type="text" placeholder="מה להוסיף?" autocomplete="off" required>
+    <button type="submit">הוספה</button>
+  </form>
+
+  <ul id="list"></ul>
+
+  <p id="empty" class="muted">הרשימה ריקה.</p>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>
