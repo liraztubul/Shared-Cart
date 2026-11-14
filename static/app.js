@@ -1,14 +1,14 @@
-// שלב 1 — השלד. את ממלאת.
+// Stage 1 skeleton. Fill these in.
 //
-// 1. loadItems()        GET /items  ומצייר את הרשימה
-// 2. setInterval        כל 3 שניות. אל תצייר מחדש אם כלום לא השתנה
+// 1. loadItems()        GET /items, render the list
+// 2. setInterval        every 3s; skip the re-render when nothing changed
 // 3. addItem(name)      POST /items
 // 4. toggle(id, status) PATCH /items/{id}
-// 5. endTrip()          POST /trips/end  ומציג את דוח החסרים
+// 5. endTrip()          POST /trips/end, show the missing-items report
 //
-// שתי נקודות שקובעות אם זה מרגיש מהיר:
-//   - עדכון אופטימי: צובעים את ה-✓ מיד, ומחזירים אחורה אם הבקשה נכשלה
-//   - כל בקשה נושאת את הכותרת X-User-Id מ-localStorage
+// Two things decide whether this feels fast:
+//   - optimistic update: paint the check immediately, roll back if the request fails
+//   - every request carries the X-User-Id header from localStorage
 
 const API = "";
 

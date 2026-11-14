@@ -1,35 +1,20 @@
 """
-ארבע טבלאות. כולן נושאות household_id.
+Four tables. Every one carries household_id.
 
-households
-    id, name, join_code (unique, index)
+households   id, name, join_code (unique, index)
+users        id, household_id (FK, index), name
+items        id, household_id (FK, index), name, quantity, note, status,
+             added_by_id, added_at, checked_by_id, checked_at
+purchases    id, household_id (FK, index), name, purchased_at
 
-users
-    id, household_id (FK, index), name
+status is one of: needed | bought | unavailable
 
-items                                     הרשימה הפעילה
-    id, household_id (FK, index), name, quantity, note,
-    status            needed | bought | unavailable
-    added_by_id       FK -> users.id
-    added_at
-    checked_by_id     FK -> users.id, nullable
-    checked_at        nullable
-
-purchases                                 היסטוריה, מקור הדאטה לדירוג בשלב 2
-    id, household_id (FK, index), name, purchased_at
-
-
-שלוש הכרעות שלך:
-
-  1. status — Enum של SQLAlchemy או String(20) עם בדיקה בקוד?
-     (רמז: SQLite לא אוכף Enum, Postgres כן. מה זה אומר על בדיקות מקומיות?)
-
-  2. String(n) תמיד עם אורך מפורש. Postgres ידחה String בלי אורך,
-     וזה יתגלה רק ביום הפריסה.
-
-  3. איזה index דרוש כדי ש-GET /items יהיה מהיר?
-     הוא רץ כל 3 שניות, והשאילתה היא תמיד
-     "כל ה-items של household_id אחד".
+Three calls to make:
+  1. status as a SQLAlchemy Enum, or String(20) validated in code?
+     SQLite does not enforce Enum; Postgres does.
+  2. Always give String an explicit length. Postgres rejects String without one.
+  3. Which index does GET /items need? It runs every 3 seconds and always
+     filters on a single household_id.
 """
 
 from app.db import Base  # noqa: F401

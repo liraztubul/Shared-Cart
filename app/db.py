@@ -3,7 +3,7 @@ from sqlalchemy.orm import DeclarativeBase, sessionmaker
 
 from app.config import settings
 
-# check_same_thread נדרש רק ל-SQLite; ב-Postgres הוא לא חוקי
+# check_same_thread is SQLite-only; Postgres rejects it
 connect_args = (
     {"check_same_thread": False} if settings.database_url.startswith("sqlite") else {}
 )

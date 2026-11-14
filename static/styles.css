@@ -4,7 +4,7 @@
   --muted: #6b7280;
   --line: #e5e7eb;
   --accent: #2f6f4f;
-  --tap: 44px;               /* אזור מגע מינימלי לאצבע */
+  --tap: 44px;               /* minimum touch target */
 }
 
 @media (prefers-color-scheme: dark) {

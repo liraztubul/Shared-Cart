@@ -1,13 +1,13 @@
 """
-נקודת החלפה אחת לזהות.
+Single swap point for identity.
 
-בשלב 1 המכשיר שולח את מזהה המשתמש בכותרת X-User-Id.
-כשיתווסף אימות אמיתי — רק הפונקציה הזאת מתחלפת, ושום endpoint לא נוגע.
+Stage 1: the device sends its user id in the X-User-Id header.
+When real auth arrives, only this function changes — no endpoint is touched.
 
-TODO: לממש אחרי ש-models.py קיים.
-  1. אם אין כותרת -> 401
-  2. לשלוף User לפי המזהה -> אין כזה -> 401
-  3. להחזיר את ה-User (ומתוכו household_id לכל שאילתה)
+TODO: implement once models.py exists.
+  1. no header            -> 401
+  2. no User with that id -> 401
+  3. return the User (its household_id scopes every query)
 """
 
 from fastapi import Depends, Header
