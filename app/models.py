@@ -17,6 +17,22 @@ Three calls to make:
      filters on a single household_id.
 """
 
-from app.db import Base  # noqa: F401
+from sqlalchemy import ForeignKey, String
+from sqlalchemy.orm import Mapped, mapped_column
 
-# TODO
+from app.db import Base
+
+class Household(Base):
+    __tablename__ = "households"
+    id: Mapped[int] = mapped_column(primary_key=True)
+    name: Mapped[str] = mapped_column(String(100))
+    join_code: Mapped[str] = mapped_column(String(20), unique=True, index=True)
+
+
+class User(Base):
+    __tablename__ = "users"
+    id: Mapped[int] = mapped_column(primary_key=True)
+    household_id: Mapped[int] = mapped_column(ForeignKey("households.id"), index=True)
+    name: Mapped[str] = mapped_column(String(100))
+
+
