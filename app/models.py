@@ -21,6 +21,10 @@ from sqlalchemy import ForeignKey, String
 from sqlalchemy.orm import Mapped, mapped_column
 
 from app.db import Base
+import enum
+from datetime import datetime
+
+from sqlalchemy import Enum, ForeignKey, String
 
 class Household(Base):
     __tablename__ = "households"
@@ -34,5 +38,28 @@ class User(Base):
     id: Mapped[int] = mapped_column(primary_key=True)
     household_id: Mapped[int] = mapped_column(ForeignKey("households.id"), index=True)
     name: Mapped[str] = mapped_column(String(100))
+
+
+class ItemStatus(enum.Enum):
+    needed = "needed"
+    bought = "bought"
+    unavailable = "unavailable"
+
+
+class Item(Base):
+    __tablename__ = "items"
+    id: Mapped[int] = mapped_column(primary_key=True)
+    household_id: Mapped[int] = mapped_column(ForeignKey("households.id"), index=True)
+    name: Mapped[str] = mapped_column(String(100))
+    quantity: Mapped[str | None] = mapped_column(String(20))
+    note: Mapped[str] = mapped_column(String(200), nullable=True)
+    status: Mapped[ItemStatus] = mapped_column(Enum(ItemStatus))
+    added_by_id: Mapped[int] = mapped_column(ForeignKey("users.id"))
+    added_at: Mapped[datetime] = mapped_column(default=datetime.utcnow)
+    checked_by_id: Mapped[int] = mapped_column(ForeignKey("users.id"), nullable=True)
+    checked_at: Mapped[datetime] = mapped_column(nullable=True)
+
+
+
 
 
